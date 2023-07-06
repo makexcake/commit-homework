@@ -4,7 +4,7 @@ Hello and Slava Ukraini!
 The following repo contains the solution for the task that you gave me.
 * This branch (main) is the branch with the deployment instructions with the deployment files.  
 * The "What-have-i-done" file is mainly for me, and contains mostly the information sources that I've used for the tasks, I thought it would be right to include it too.
-* The "app" branch contains the code for the app and the Dockerfile.
+* The "node-app" branch contains the code for the app and the Dockerfile.
 
 ## Deployment instructions
 
