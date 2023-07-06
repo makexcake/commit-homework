@@ -1,0 +1,75 @@
+1. provisioned 4 vms using vagrant tool (bastion host, master-node, 2 worker nodes)
+
+2. deployed cluster using rke by insalling kubectl and rke on the bastion host, creating cluster.yaml file and
+   running $rke up command.
+
+3. deployed the application but recieved an error meslssage from nginx
+
+4. Fixed nginx error using th efollowing command $ kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+   https://github.com/kubernetes/ingress-nginx/issues/5401
+   https://stackoverflow.com/questions/61616203/nginx-ingress-controller-failed-calling-webhook
+
+5. Assigned node-app.com address to ip address of one of the nodes
+
+6. Deployed the app again, it works!
+
+7. provisioned windows 2019 server machine
+
+8. setted the ip and default gateway in adapter settings
+
+9. setted icmp rules for ping and tested connection. WORKED! (defauld gw 172.16.8.1)
+
+10. configured it as DNS server with the adress putin.hui
+   https://www.youtube.com/watch?v=h3sxduUt5a8
+
+11. set cluster nodes IPs to be the destination of the following url: http://node-app.putin.hui/
+
+12. configured the nodes to use my DNS server
+    https://www.linuxfordevices.com/tutorials/linux/change-dns-on-linux
+
+13. To install enterprise certificate authority the user needs to be in the following groups:
+    PUTINHUI\Enterprise Admins
+    PUTINHUI\Domain Admins
+    configure it through active directory
+    link to source: https://mssec.wordpress.com/2014/01/15/the-option-enterprise-grayed-out-during-ca-installation/#:~:text=This%20is%20most%20likely%20because,in%20the%20Forest%20Root%20Domain.
+    https://www.youtube.com/watch?v=R4mrcju5wec&t=1s
+
+14. enable web in certificate request option 
+    link to source: https://www.firewall.cx/microsoft-knowledgebase/windows-server-2016/1260-how-to-enaable-webserver-certificate-template.html     
+
+15. Issue a sertificate to the web-app
+    https://www.youtube.com/watch?v=VZrxUgmYnec&t=181s
+
+16. The output file is CA certificate and our issued certificate, so we also import the 
+    key from CA console as pfx file so we will have a private key.
+
+17. Create a secret in k8s with the following command:
+    kubectl create secret tls <secret name> --cert=<.crt_file> --key=<.key_file>
+
+18. Because we are not recognized CA we need to install the certificates on our 
+    local machines otherwise the browser will not trust our server.
+    NOTE: browsers on my local machine see it as https but still warn me, I 
+          think it happens because I am a combina certificate authority and 
+          not some google etc.
+    
+
+
+
+
+
+notes:
+
+kubectl port-forward svc/ingress-nginx-controller -n argocd 8080:31922
+docker pull makecake/mod-8-example-app
+
+hosts list pathC:\Windows\System32\drivers\etc
+
+
+incoming connections dump: sudo tcpdump -i enp0s8 '(icmp)' -nn -vv
+
+http://node-app.putin.hui/
+
+kubectl create secret tls node-app-cert --cert=node-app_putin_hui.crt --key=node-app_putin_hui.key
+
+
+

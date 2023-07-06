@@ -1,0 +1,27 @@
+nodes:
+
+  - address: 172.16.8.10 
+    name: master
+    user: vagrant
+    role: 
+      - controlplane
+      - etcd
+
+  - address: 172.16.8.11 
+    name: node1
+    user: vagrant
+    role: 
+    - worker
+
+  - address: 172.16.8.12 
+    name: node2
+    user: vagrant
+    role: 
+    - worker
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
+

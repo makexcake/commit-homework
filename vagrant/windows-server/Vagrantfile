@@ -1,0 +1,13 @@
+Vagrant.configure("2") do |config|
+  # Box configuration
+  config.vm.box = "jborean93/WindowsServer2019"
+
+  # Network configuration
+  config.vm.network "private_network", ip: "172.16.8.20"
+
+  # VM configuration
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--cpus", "2"]
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+  end
+end
